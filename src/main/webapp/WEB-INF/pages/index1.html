@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table{
+            width: 100%;
+            background: white;
+            color: blue;
+            border-spacing: 1px;
+        }
+        td, th {
+            background: bisque;
+            padding: 5px;
+        }
+    </style>
+</head>
+    <body>
+        Hello WORLD!
+<!--        th: text ="${user}"-->
+        <h2><a href="/edit"> edit page </a> </h2>
+        <table boarder="1">
+
+<!--            <tr style="border: 2px solid black">-->
+<!--                <td th:text="${user}"/>-->
+
+            </tr>
+            <tr>
+                <th> ID </th>
+                <th> NAME </th>
+                <th> LAST NAME</th>
+                <th> AGE </th>
+                <th> ACTION </th>
+            </tr>
+            <th:block th:each="user : ${listUsers}">
+                <tr style="border: 2px solid black">
+                    <th th:text="${user.id}" />
+                    <th th:text="${user.name}" />
+                    <th th:text="${user.lastName}" />
+                    <th th:text="${user.age}" />
+                    <th> <a th:href="@{/edit/{userId}(userId = ${user.id})}">edit</a>
+                        <a th:href="@{/delete/{userId}(userId = ${user.id})}">delete</a> </th>
+
+                </tr>
+            </th:block>
+
+            </tr>
+        </table>
+    <div align="center"> <h2>Add User</h2>
+        <form action="#" th:action="@{/add}" th:object="${user}" method="post">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" th:field="*{name}">
+            <label for="lastName"> Last Name</label>
+            <input type="text" name="lastName" id="lastName" th:field="*{lastName}">
+            <label for="age">Age</label>
+            <input type="text" name="age" id="age" th:field="*{age}">
+
+            <input type="submit" value="Add User"></form></div>
+    </body>
+</html>
