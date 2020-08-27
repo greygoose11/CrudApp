@@ -32,20 +32,20 @@ public class HibernateConfig {
 
     @Bean
     public DataSource getDataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(env.getProperty("db.driver"));
         dataSource.setUrl(env.getProperty("db.url"));
         dataSource.setUsername(env.getProperty("db.username"));
         dataSource.setPassword(env.getProperty("db.password"));
 
-        dataSource.setInitialSize(Integer.valueOf(env.getRequiredProperty("db.initialSize")));
-        dataSource.setMinIdle(Integer.valueOf(env.getRequiredProperty("db.minIdle")));
-        dataSource.setMaxIdle(Integer.valueOf(env.getRequiredProperty("db.maxIdle")));
-        dataSource.setTimeBetweenEvictionRunsMillis(Long.valueOf(env.getRequiredProperty("db.timeBetweenEvictionRunsMillis")));
-        dataSource.setMinEvictableIdleTimeMillis(Long.valueOf(env.getRequiredProperty("db.minEvictableIdleTimeMillis")));
-        dataSource.setTestOnBorrow(Boolean.valueOf(env.getRequiredProperty("db.testOnBorrow")));
-        dataSource.setValidationQuery(env.getRequiredProperty("db.validationQuery"));
+//        dataSource.setInitialSize(Integer.valueOf(env.getRequiredProperty("db.initialSize")));
+//        dataSource.setMinIdle(Integer.valueOf(env.getRequiredProperty("db.minIdle")));
+//        dataSource.setMaxIdle(Integer.valueOf(env.getRequiredProperty("db.maxIdle")));
+//        dataSource.setTimeBetweenEvictionRunsMillis(Long.valueOf(env.getRequiredProperty("db.timeBetweenEvictionRunsMillis")));
+//        dataSource.setMinEvictableIdleTimeMillis(Long.valueOf(env.getRequiredProperty("db.minEvictableIdleTimeMillis")));
+//        dataSource.setTestOnBorrow(Boolean.valueOf(env.getRequiredProperty("db.testOnBorrow")));
+//        dataSource.setValidationQuery(env.getRequiredProperty("db.validationQuery"));
 
         return dataSource;
     }
@@ -53,7 +53,6 @@ public class HibernateConfig {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
-//        properties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
         return properties;
     }
@@ -61,7 +60,6 @@ public class HibernateConfig {
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
-//        lcemfb.setJpaVendorAdapter(getJpaVendorAdapter());
         lcemfb.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         lcemfb.setDataSource(getDataSource());
         lcemfb.setPersistenceUnitName("crud-app");
@@ -79,7 +77,7 @@ public class HibernateConfig {
     @Bean(name = "transactionManager")
     public PlatformTransactionManager txManager() {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-//                getEntityManagerFactoryBean().getObject());
+
                 jpaTransactionManager.setEntityManagerFactory(getEntityManagerFactoryBean().getObject());
         return jpaTransactionManager;
     }

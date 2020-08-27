@@ -22,13 +22,6 @@ public class UserController {
     private UserService userService;
 
 
-//    @Qualifier(value = "userServiceImpl")
-//    public UserController(UserService userService) {
-//        this.userService = userService;
-//    }
-//    public void setUserService(UserService userService) {
-//        this.userService = userService;
-//    }
     @GetMapping(value = "/")
     public String home(){
         return "redirect:/users";
@@ -42,11 +35,7 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user){
         userService.save(user);
-//        if(user.getId() == 0) {
-//            this.userService.addUser(user);
-//        } else {
-//            this.userService.updateUser(user);
-//        }
+
         return "redirect:/users";
     }
 
@@ -60,7 +49,6 @@ public class UserController {
     @GetMapping("/edit/{id}")
     public String editUser(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.get(id));
-//        model.addAttribute("listUsers", this.userService.listUsers());
 
         return "editUser";
     }
@@ -71,32 +59,5 @@ public class UserController {
 
         return "redirect:/users";
     }
-
-//    @RequestMapping("/userdate/{id}")
-//    public String userData(@PathVariable("id") long id, Model model) {
-//        model.addAttribute("user", this.userService.getUserById(id));
-//
-//        return "userdate";
-//
-//    }
-
-
-//    @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
-//    public ModelAndView hello(HttpServletResponse response) throws IOException {
-//        ModelAndView modelAndView = new ModelAndView();
-//        List<User> usersList = new ArrayList<>();
-//        usersList.add(new User(1,"Ivan", "Ivanov",40 ));
-//        usersList.add(new User(2,"Федор", "Федоров",30 ));
-//        usersList.add(new User(5,"Petr", "Petrov",30 ));
-//        modelAndView.addObject("userList", usersList);
-//        modelAndView.setViewName("index1");
-//        return modelAndView;
-//    }/*
-//    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-//    public ModelAndView editUsers(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("editIndex");
-//        return modelAndView;
-//    }
 
 }

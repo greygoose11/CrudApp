@@ -6,25 +6,22 @@
     <title>Title</title>
     <style>
         table{
-            width: 100%;
-            background: white;
-            color: blue;
+            width: 50%;
+            background: black;
+            color: #0c0c0c;
             border-spacing: 1px;
         }
         td, th {
-            background: bisque;
+            background: #f6f3f3;
             padding: 5px;
         }
     </style>
 </head>
     <body>
-        Hello WORLD!
-<!--        th: text ="${user}"-->
-        <h2><a href="/edit"> edit page </a> </h2>
-        <table boarder="1">
+    <div align="center">
+        <h2>All Users</h2>
 
-<!--            <tr style="border: 2px solid black">-->
-<!--                <td th:text="${user}"/>-->
+        <table boarder="3">
 
             </tr>
             <tr>
@@ -41,14 +38,16 @@
                     <th th:text="${user.lastName}" />
                     <th th:text="${user.age}" />
                     <th> <a th:href="@{/edit/{userId}(userId = ${user.id})}">edit</a>
-                        <a th:href="@{/delete/{userId}(userId = ${user.id})}">delete</a> </th>
+                        <a th:href="@{/delete/{userId}(userId = ${user.id})}">delete</a>
+                    </th>
 
                 </tr>
             </th:block>
 
             </tr>
         </table>
-    <div align="center"> <h2>Add User</h2>
+    <div align="center">
+        <h2>Add User</h2>
         <form action="#" th:action="@{/add}" th:object="${user}" method="post">
             <label for="name">Name</label>
             <input type="text" name="name" id="name" th:field="*{name}">
@@ -57,6 +56,8 @@
             <label for="age">Age</label>
             <input type="text" name="age" id="age" th:field="*{age}">
 
-            <input type="submit" value="Add User"></form></div>
+            <input type="submit" value="Add User"></form>
+    </div>
+    </div>
     </body>
 </html>
